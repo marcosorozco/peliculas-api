@@ -8,6 +8,7 @@ use App\App\Peliculas\PeliculasObtenerInformacion;
 use App\App\Peliculas\PeliculaTO;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PeliculaController extends Controller
 {
@@ -36,6 +37,7 @@ class PeliculaController extends Controller
         $peliculaTO->setSortByEstrellasPromedio($request->input('sort_by_estrellas'));
         $peliculaTO->setSortByTotalRentas($request->input('sort_by_rentas'));
         $peliculaTO->setPaginate($request->get('paginate', 10));
+        Log::info('request', \request()->all());
         try {
             $peliculas = $this->peliculaRepository->buscarPeliculas($peliculaTO);
             $resultado = BusquedaProductosMapResponse::json($peliculas);

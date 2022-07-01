@@ -39,7 +39,7 @@ class PeliculaRepository implements PeliculaRepositoryInteface
         $pelicula = Pelicula::query();
         $pelicula->with('peliculasPosters');
         $pelicula->where('titulo', 'like', '%'.$peliculaTO->getQuery().'%');
-        $pelicula->where('descripcion', 'like', '%'.$peliculaTO->getQuery().'%');
+        $pelicula->orWhere('descripcion', 'like', '%'.$peliculaTO->getQuery().'%');
         $pelicula->when(
             $peliculaTO->getSortByEstrellasPromedio(),
             function ($query) {

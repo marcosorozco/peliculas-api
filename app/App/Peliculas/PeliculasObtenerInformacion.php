@@ -18,6 +18,7 @@ class PeliculasObtenerInformacion
         ])->get("https://api.themoviedb.org/3/movie/$pelicula->codigo_plataforma}/videos?language=es");
         $peliculaVideos = json_decode($response->body());
         $pelicula->videos = $peliculaVideos->results;
+        $pelicula->peliculasPoster = $pelicula->peliculasPosters;
         return $pelicula;
     }
 }

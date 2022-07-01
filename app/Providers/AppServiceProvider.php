@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\App\Peliculas\PeliculaRepository;
+use App\App\Peliculas\PeliculaRepositoryInteface;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(PeliculaRepositoryInteface::class, PeliculaRepository::class);
     }
 
     /**
@@ -23,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Schema::defaultStringLength(191);
     }
 }

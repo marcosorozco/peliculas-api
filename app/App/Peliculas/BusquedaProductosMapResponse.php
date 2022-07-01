@@ -15,7 +15,7 @@ class BusquedaProductosMapResponse
             $stdClass->descripcion = $pelicula->descripcion;
             $stdClass->fecha_lanzamiento = $pelicula->fecha_lanzamiento;
             $stdClass->estrellas_promedio = $pelicula->estrellas_promedio;
-            $stdClass->peliculasPoster = $pelicula->peliculasPoster;
+            $stdClass->peliculasPoster = $pelicula->peliculasPosters;
             return $stdClass;
         });
     }

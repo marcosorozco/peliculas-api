@@ -31,7 +31,7 @@ class PeliculaController extends Controller
     {
         $json = [
             'status' => '200',
-            'data' => []
+            'resultado' => []
         ];
         $peliculaTO = new PeliculaTO();
         $peliculaTO->setSortByEstrellasPromedio($request->input('sort_by_estrellas'));
@@ -41,8 +41,8 @@ class PeliculaController extends Controller
         try {
             $peliculas = $this->peliculaRepository->buscarPeliculas($peliculaTO);
             $resultado = BusquedaProductosMapResponse::json($peliculas);
-            $json['data']['page'] = request('page', 1);
-            $json['data']['peliculas'] = $resultado;
+            $json['resultado']['page'] = request('page', 1);
+            $json['resultado']['peliculas'] = $resultado;
         } catch (\Exception $error) {
             $json['status'] = 500;
             $json['message'] = $error->getMessage();
@@ -83,14 +83,14 @@ class PeliculaController extends Controller
     {
         $json = [
             'status' => '200',
-            'data' => []
+            'resultado' => []
         ];
         $peliculaTO = new PeliculaTO();
         $peliculaTO->setId($id);
         $peliculaTO->setPaginate(10);
         try {
             $pelicula = $this->peliculaRepository->findPelicula($peliculaTO);
-            $json['data']['pelicula'] = PeliculasObtenerInformacion::get($pelicula);
+            $json['resultado']['pelicula'] = PeliculasObtenerInformacion::get($pelicula);
         } catch (\Exception $error) {
             $json['status'] = 500;
             $json['message'] = $error->getMessage();

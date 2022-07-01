@@ -26,14 +26,14 @@ class PeliculaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $json = [
             'status' => '200',
             'data' => []
         ];
         $peliculaTO = new PeliculaTO();
-        $peliculaTO->setPaginate(10);
+        $peliculaTO->setPaginate($request->get('paginate', 10));
         try {
             $peliculas = $this->peliculaRepository->buscarPeliculas($peliculaTO);
             $resultado = BusquedaProductosMapResponse::json($peliculas);

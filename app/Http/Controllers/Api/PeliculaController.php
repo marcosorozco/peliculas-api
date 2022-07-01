@@ -33,6 +33,8 @@ class PeliculaController extends Controller
             'data' => []
         ];
         $peliculaTO = new PeliculaTO();
+        $peliculaTO->setSortByEstrellasPromedio($request->input('sort_by_estrellas'));
+        $peliculaTO->setSortByTotalRentas($request->input('sort_by_rentas'));
         $peliculaTO->setPaginate($request->get('paginate', 10));
         try {
             $peliculas = $this->peliculaRepository->buscarPeliculas($peliculaTO);

@@ -20,3 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::resource('peliculas', \App\Http\Controllers\Api\PeliculaController::class);
+
+
+Route::get('peliculas/buscar-peliculas/{query}', [\App\Http\Controllers\Api\PeliculaController::class, 'buscarPeliculas'])
+    ->name('peliculas.buscarPeliculas');

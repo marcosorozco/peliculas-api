@@ -33,4 +33,28 @@ class PeliculaRepository implements PeliculaRepositoryInteface
     {
         return Pelicula::find($peliculaTO->getId());
     }
+
+    public function buscarPeliculasPalabras(PeliculaTO $peliculaTO)
+    {
+        $pelicula = Pelicula::query();
+        $pelicula->with('peliculasPosters');
+        $pelicula->where('titulo', 'like', '%'.$peliculaTO->getQuery().'%');
+        $pelicula->where('descripcion', 'like', '%'.$peliculaTO->getQuery().'%');
+        $pelicula->when(
+            $peliculaTO->getSortByEstrellasPromedio(),
+            function ($query) {
+                $query->orderBy('estrellas_promedio', 'desc');
+            }
+        );
+        $pelicula->when(
+            $peliculaTO->getSortByTotalRentas(),
+            function ($query) {
+                $query->orderBy('total_rentas', 'desc');
+            }
+        );
+        if ($peliculaTO->getPaginate()) {
+            return $pelicula->paginate($peliculaTO->getPaginate());
+        }
+        return $pelicula->get();
+    }
 }

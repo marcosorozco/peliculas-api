@@ -8,4 +8,6 @@ interface PeliculaRepositoryInteface
     public function buscarPeliculas(PeliculaTO $peliculaTO);
 
     public function findPelicula(PeliculaTO $peliculaTO);
+
+    public function buscarPeliculasPalabras(PeliculaTO $peliculaTO);
 }

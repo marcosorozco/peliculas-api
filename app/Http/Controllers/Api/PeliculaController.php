@@ -132,4 +132,30 @@ class PeliculaController extends Controller
     {
         //
     }
+
+    public function buscarPeliculas($query, Request $request)
+    {
+        $json = [
+            'status' => '200',
+            'resultado' => []
+        ];
+        $peliculaTO = new PeliculaTO();
+        $peliculaTO->setQuery($query);
+        $peliculaTO->setSortByEstrellasPromedio($request->input('sort_by_estrellas'));
+        $peliculaTO->setSortByTotalRentas($request->input('sort_by_rentas'));
+        $peliculaTO->setPaginate($request->get('paginate', 10));
+        Log::info('request', \request()->all());
+        try {
+            $peliculas = $this->peliculaRepository->buscarPeliculasPalabras($peliculaTO);
+            $resultado = BusquedaProductosMapResponse::json($peliculas);
+            $json['resultado']['page'] = request('page', 1);
+            $json['resultado']['peliculas'] = $resultado;
+        } catch (\Exception $error) {
+            $json['status'] = 500;
+            $json['message'] = $error->getMessage();
+            $json['trace'] = $error->getTrace();
+        }
+
+        return response()->json($json);
+    }
 }

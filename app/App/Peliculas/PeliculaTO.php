@@ -8,6 +8,7 @@ class PeliculaTO
     private $paginate;
     private $sortByEstrellasPromedio;
     private $sortByTotalRentas;
+    private $query;
 
     /**
      * @return mixed
@@ -71,5 +72,21 @@ class PeliculaTO
     public function setId($id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    /**
+     * @param mixed $query
+     */
+    public function setQuery($query): void
+    {
+        $this->query = $query;
     }
 }

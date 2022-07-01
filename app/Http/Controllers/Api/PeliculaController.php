@@ -44,6 +44,7 @@ class PeliculaController extends Controller
         } catch (\Exception $error) {
             $json['status'] = 500;
             $json['message'] = $error->getMessage();
+            $json['trace'] = $error->getTrace();
         }
 
         return response()->json($json);

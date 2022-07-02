@@ -87,12 +87,17 @@ class PeliculaRepository implements PeliculaRepositoryInteface
 
     public function guardarRenta(PeliculaTO $peliculaTO)
     {
-        PeliculaRenta::insert([
-            'pelicula_id' => $peliculaTO->getId(),
-            'periodo_id' => $peliculaTO->getPeriodoId(),
-            'precio_periodo' => $peliculaTO->getPrecio(),
-            'precio_total' => $peliculaTO->getPrecioTotal(),
-            'fecha' => $peliculaTO->getFecha(),
-        ]);
+        DB::transaction(function () use ($peliculaTO) {
+            PeliculaRenta::insert([
+                'pelicula_id' => $peliculaTO->getId(),
+                'periodo_id' => $peliculaTO->getPeriodoId(),
+                'precio_periodo' => $peliculaTO->getPrecio(),
+                'precio_total' => $peliculaTO->getPrecioTotal(),
+                'fecha' => $peliculaTO->getFecha(),
+            ]);
+            $pelicula = $this->findPelicula($peliculaTO);
+            $pelicula->total_rentas += 1;
+            $pelicula->save();
+        });
     }
 }

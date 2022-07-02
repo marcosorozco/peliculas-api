@@ -80,7 +80,8 @@ class PeliculaRepository implements PeliculaRepositoryInteface
         PeliculaComentario::insert([
             'pelicula_id' => $peliculaTO->getId(),
             'name' => $peliculaTO->getName(),
-            'comentario' => $peliculaTO->getComentario()
+            'comentario' => $peliculaTO->getComentario(),
+            'fecha'=>date('Y-m-d')
         ]);
     }
 

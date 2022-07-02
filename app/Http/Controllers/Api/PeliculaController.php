@@ -181,6 +181,7 @@ class PeliculaController extends Controller
 
     public function guardarRentaPelicula($pelicula_id, Request $request)
     {
+        Log::info('guardarRentaPelicula', \request()->all());
         $json = [
             'status' => '200',
             'resultado' => []

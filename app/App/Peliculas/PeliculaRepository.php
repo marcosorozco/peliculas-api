@@ -16,13 +16,13 @@ class PeliculaRepository implements PeliculaRepositoryInteface
         $pelicula = Pelicula::query();
         $pelicula->with('peliculasPosters');
         $pelicula->when(
-            $peliculaTO->getSortByEstrellasPromedio(),
+            $peliculaTO->getSortByEstrellasPromedio() != 'false',
             function ($query) {
                 $query->orderBy('estrellas_promedio', 'desc');
             }
         );
         $pelicula->when(
-            $peliculaTO->getSortByTotalRentas(),
+            $peliculaTO->getSortByTotalRentas() != 'false',
             function ($query) {
                 $query->orderBy('total_rentas', 'desc');
             }

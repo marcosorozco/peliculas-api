@@ -158,4 +158,46 @@ class PeliculaController extends Controller
 
         return response()->json($json);
     }
+
+    public function guardarVotacion($pelicula_id, Request $request)
+    {
+        $json = [
+            'status' => '200',
+            'resultado' => []
+        ];
+        $peliculaTO = new PeliculaTO();
+        $peliculaTO->setId($pelicula_id);
+        $peliculaTO->setEstrellas($request->input('estrellas', 0));
+        try {
+            $peliculas = $this->peliculaRepository->guardarVotacion($peliculaTO);
+        } catch (\Exception $error) {
+            $json['status'] = 500;
+            $json['message'] = $error->getMessage();
+            $json['trace'] = $error->getTrace();
+        }
+
+        return response()->json($json);
+    }
+
+    public function guardarRentaPelicula($pelicula_id, Request $request)
+    {
+        $json = [
+            'status' => '200',
+            'resultado' => []
+        ];
+        $peliculaTO = new PeliculaTO();
+        $peliculaTO->setId($pelicula_id);
+        $peliculaTO->setPeriodoId($request->input('periodo_id'));
+        $peliculaTO->setPrecio($request->input('precio'));
+        $peliculaTO->setFecha(date('Y-m-d'));
+        try {
+            $this->peliculaRepository->guardarRenta($peliculaTO);
+        } catch (\Exception $error) {
+            $json['status'] = 500;
+            $json['message'] = $error->getMessage();
+            $json['trace'] = $error->getTrace();
+        }
+
+        return response()->json($json);
+    }
 }

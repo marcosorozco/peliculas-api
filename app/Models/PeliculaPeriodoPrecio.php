@@ -10,4 +10,9 @@ class PeliculaPeriodoPrecio extends Model
 
     protected $fillable = ['pelicula_id', 'periodo_id', 'precio'];
 
+    public function periodo()
+    {
+        return $this->belongsTo(Periodo::class);
+    }
+
 }

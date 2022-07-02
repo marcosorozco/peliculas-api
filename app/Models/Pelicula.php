@@ -16,4 +16,19 @@ class Pelicula extends Model
     {
         return $this->hasMany(PeliculaPoster::class, 'pelicula_id');
     }
+
+    public function peliculasEstrellas()
+    {
+        return $this->hasMany(PeliculaEstrellas::class, 'pelicula_id');
+    }
+
+    public function peliculasComentarios()
+    {
+        return $this->hasMany(PeliculaComentario::class, 'pelicula_id');
+    }
+
+    public function peliculaPeriodosPrecio()
+    {
+        return $this->hasMany(PeliculaPeriodoPrecio::class, 'pelicula_id');
+    }
 }

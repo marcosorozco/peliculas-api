@@ -19,6 +19,10 @@ class PeliculasObtenerInformacion
         $peliculaVideos = json_decode($response->body());
         $pelicula->videos = $peliculaVideos->results;
         $pelicula->peliculasPoster = $pelicula->peliculasPosters;
+        $pelicula->peliculaPeriodosPrecio = $pelicula->peliculaPeriodosPrecio;
+        $pelicula->periodos = $pelicula->peliculaPeriodosPrecio->map(function ($peliculaPeriodoPrecio){
+            return $peliculaPeriodoPrecio->periodo;
+        });
         return $pelicula;
     }
 }

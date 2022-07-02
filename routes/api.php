@@ -27,6 +27,8 @@ Route::get('peliculas/buscar-peliculas/{query}', [\App\Http\Controllers\Api\Peli
 
 Route::post('peliculas/{pelicula_id}/estrellas', [\App\Http\Controllers\Api\PeliculaController::class, 'guardarVotacion']);
 
+Route::post('peliculas/{pelicula_id}/renta', [\App\Http\Controllers\Api\PeliculaController::class, 'guardarRentaPelicula']);
+
 Route::get('peliculas/{pelicula_id}/comentarios', [\App\Http\Controllers\Api\PeliculaComentarioController::class, 'index']);
 
 Route::post('peliculas/{pelicula_id}/comentarios', [\App\Http\Controllers\Api\PeliculaComentarioController::class, 'guardarComentario']);

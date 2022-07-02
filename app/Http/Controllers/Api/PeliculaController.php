@@ -190,6 +190,7 @@ class PeliculaController extends Controller
         $peliculaTO->setId($pelicula_id);
         $peliculaTO->setPeriodoId($request->input('periodo_id'));
         $peliculaTO->setPrecio($request->input('precio'));
+        $peliculaTO->setPrecioTotal($request->input('precio_total'));
         $peliculaTO->setFecha(date('Y-m-d'));
         try {
             $this->peliculaRepository->guardarRenta($peliculaTO);

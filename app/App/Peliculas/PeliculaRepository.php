@@ -27,6 +27,7 @@ class PeliculaRepository implements PeliculaRepositoryInteface
                 $query->orderBy('total_rentas', 'desc');
             }
         );
+        $pelicula->orderBy('id');
         if ($peliculaTO->getPaginate()) {
             return $pelicula->paginate($peliculaTO->getPaginate());
         }
